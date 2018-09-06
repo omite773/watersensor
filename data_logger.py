@@ -8,15 +8,16 @@ from datetime import datetime
 #Functions for sensor devices
 import i2c_devices
 import i2c_bb_devices
+
 #Initiate availabilities for plugNplay functionality
 arduinoAvailable = False
 temperatureAvailable = False
 #Keep sensor values global for ease of access
 temperature = None
-sun = None
+#sun = None
+eleCond = None
 battery = None
 current = None
-watt = None
 
 arduino_Vref = 5.0
 
@@ -61,9 +62,9 @@ def append_log():
 
         if os.stat("/home/pi/watersensor/data_logs/data_log.csv").st_size == 0:
             #If log file empty, fill out header
-            file.write('Time, Temp[C], Sun[V], Battery[V], Current[mA], Watt[mW]\n')
+            file.write('Time, Temp[C], EleCond [?] Battery[V], Current[mA]\n')
         #Then the sensor values separated by commas (.csv-format)
-        file.write(datetime.now().strftime('%Y-%m-%d_%H:%M') + ", " + str(temperature) + ", " + str(sun) + ", " + str(battery) + ", " + str(current) + ", " + str(watt) + "\n" )
+        file.write(datetime.now().strftime('%Y-%m-%d_%H:%M') + ", " + str(temperature) + ", " + str(eleCond) + ", " + str(battery) + ", " + str(current) + ", " + "\n" )
         file.close()
 
     else:
@@ -76,31 +77,29 @@ def update_sensors(Log, Backup):
     global arduinoAvailable
     global temperatureAvailable
     global temperature
-    global sun
+    global eleCond
     global battery
     global current
-    global watt
+
 
     if(arduinoAvailable):
         try:
-            (sun, battery, current) = i2c_bb_devices.read_arduino()
+            (eleCond, battery, current) = i2c_bb_devices.read_arduino()
 #            if(battery < 690 and battery > 0):
 #                #Battery too low, arduino about to cut power
 #                shutdown()
 
             #Convert from raw values to voltage
-            sun = round(float(sun*arduino_Vref/1023),3) #V
+            eleCond = round(float(eleCond*arduino_Vref/1023,3)) #What unit tho?
             battery = round(float(battery*arduino_Vref/1023),3) #V
             current = round(float(current*arduino_Vref*1000/(1023*4.74)),3) #mA
             #Calculate power drawn from solar panel to charge battery
-            watt = round(current*sun,3) #mW
         except Exception as e:
             #Catch error and set arduino as unavailable in case of hardware failure
             arduinoAvailable = False
-            sun = None
+            eleCond = None
             battery = None
             current = None
-            watt = None
             log_error(str(e) + " ARDUINO ERR, disabling")
 
     if(temperatureAvailable):

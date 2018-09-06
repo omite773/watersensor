@@ -48,15 +48,17 @@ def arduino_init():
         return 0
 
 def read_arduino():
-    #Get energy values from arduino, indexes 0, 1 and 2
+    #Get energy values from arduino, indexes 0 and 1
     #Arrives on split form, lower byte first
-    sunVRaw = recieve(arduino_addr, 0x00, 2)
-    sunV = (int(sunVRaw[1]) << 8) | int(sunVRaw[0])
+#    sunVRaw = recieve(arduino_addr, 0x00, 2)
+#    sunV = (int(sunVRaw[1]) << 8) | int(sunVRaw[0])
+    eleCondRaw = recieve(arduino_addr, 0x00, 2)
+    eleCond = (int(eleCondRaw[1]) << 8) | int(eleCondRaw[0])
     battVRaw = recieve(arduino_addr, 0x01, 2)
     batteryV = (int(battVRaw[1]) << 8) | int(battVRaw[0])
     currentRaw = recieve(arduino_addr, 0x02, 2)
     current = (int(currentRaw[1]) << 8) | int(currentRaw[0])
-    return (sunV, batteryV, current)
+    return (eleCond, batteryV, current)
 
 
 #May not be used!

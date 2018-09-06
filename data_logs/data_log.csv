@@ -1,2 +1,2 @@
-Time, Temp[C], Sun[V], Battery[V], Current[mA], Watt[mW]
-2018-09-05_16:12, None, None, None, None, None
+Time, Temp[C], EleCond [?] Battery[V], Current[mA]
+2018-09-06_10:47, None, None, None, None, 

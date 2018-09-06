@@ -1,0 +1,4 @@
+2018-09-06_10:19 Msg: [Errno 13] Permission denied: '/home/pi/watersensor/data_logs/data_log.csv' Opening data_log.csv ERR
+2018-09-06_10:46 Msg: [Errno 13] Permission denied: '/home/pi/watersensor/data_logs/data_log.csv' Opening data_log.csv ERR
+2018-09-06_10:46 Msg: float() takes at most 1 argument (2 given) ARDUINO ERR, disabling
+2018-09-06_10:47 Msg: float() takes at most 1 argument (2 given) ARDUINO ERR, disabling
