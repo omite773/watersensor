@@ -62,7 +62,7 @@ def append_log():
 
         if os.stat("/home/pi/watersensor/data_logs/data_log.csv").st_size == 0:
             #If log file empty, fill out header
-            file.write('Time, Temp[C], EleCond [?] Battery[V], Current[mA]\n')
+            file.write('Time, Temp[C], EleCond [?], Battery[V], Current[mA]\n')
         #Then the sensor values separated by commas (.csv-format)
         file.write(datetime.now().strftime('%Y-%m-%d_%H:%M') + ", " + str(temperature) + ", " + str(eleCond) + ", " + str(battery) + ", " + str(current) + ", " + "\n" )
         file.close()
