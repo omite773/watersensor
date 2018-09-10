@@ -39,17 +39,6 @@ def initiate():
     if(i2c_bb_devices.arduino_init()):
         global arduinoAvailable
         arduinoAvailable = True
-#        update_time()
-
-#Time function which updates time via Arduino Uno when RPi has been down.
-#def update_time():
-#    offset_raw = i2c_bb_devices.recieve(0x04, 0x03, 4)
-#    offset = (int(offset_raw[3]) << 24) | (int(offset_raw[2]) << 16) | (int(offset_raw[1]) << 8) | int(offset_raw[0])
-#    while (offset > 65535):
-#        subprocess.call("sudo date -s '65535 seconds'",shell=True)
-#        offset = offset - 65535
-#    subprocess.call("sudo date -s '" + str(offset) + " seconds'",shell=True)
-
 
 ########## Function which handles storing values onto the .csv file #########    
 #Write current measurement values to the log file
@@ -70,7 +59,6 @@ def append_log():
         #Then the sensor values separated by commas (.csv-format)
         file.write(datetime.now().strftime('%Y-%m-%d_%H:%M') + ", " + str(temperature) + ", " + str(eleCond) + ", " + str(battery) + ", " + str(current) + ", " + "\n" )
         file.close()
-
     else:
         #Error tracking
         print("Log dir not present")
@@ -94,13 +82,16 @@ def update_sensors(Log, Backup):
 #            if(battery < 690 and battery > 0):
 #                #Battery too low, arduino about to cut power
 #                shutdown()
-
             #Convert from raw values to voltage
-            eleCond = round(float(eleCond*arduino_Vref/1023,3)) #What unit tho?
+            print(eleCond)
+            print(battery)
+            eleCond = round(float(eleCond*arduino_Vref/1023),3) #What unit tho?
             battery = round(float(battery*arduino_Vref/1023),3) #V
             current = round(float(current*arduino_Vref*1000/(1023*4.74)),3) #mA
             #Calculate power drawn from solar panel to charge battery
+            print("jahopp")
         except Exception as e:
+            print("amenvadnuda")
             #Catch error and set arduino as unavailable in case of hardware failure
             arduinoAvailable = False
             eleCond = None
@@ -117,6 +108,7 @@ def update_sensors(Log, Backup):
             temperatureAvailable = False
             log_error(str(e) +  " TEMP_SENS ERR, disabling")
 
+    append_log()
     if Log == True:
         #Log to local .csv file
         append_log()
