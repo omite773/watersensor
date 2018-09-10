@@ -154,7 +154,7 @@ initiate()
 while(1):
     #Pumps water every ? seconds. 
     if pump_timer == 0:
-        water_pump(20)
+        water_pump.water_pump(20)
         pump_timer = pump_const_timer
     else:
         pump_timer -= 1 #Counts down pump_timer 
