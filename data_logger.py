@@ -6,6 +6,7 @@ import sys
 from time import sleep
 from datetime import datetime
 #Functions for sensor devices
+import water_pump
 import i2c_devices
 import i2c_bb_devices
 
@@ -23,9 +24,11 @@ arduino_Vref = 5.0
 
 local_const_timer = 100
 usb_const_timer= 10
+pump_const_timer = 200
 
 usb_timer = usb_const_timer
 local_timer = local_const_timer
+pump_timer = pump_const_timer
 
 #Figure out available devices at launch, also set certain settings
 def initiate():
@@ -47,7 +50,8 @@ def initiate():
 #        offset = offset - 65535
 #    subprocess.call("sudo date -s '" + str(offset) + " seconds'",shell=True)
 
-    
+
+########## Function which handles storing values onto the .csv file #########    
 #Write current measurement values to the log file
 def append_log():
     if os.path.isdir("/home/pi/watersensor/data_logs/"):       
@@ -72,6 +76,8 @@ def append_log():
         print("Log dir not present")
         log_error("Log directory not found")
 
+
+########## Functions which updates sensor values and logs data to .csv file and USB ##########
 def update_sensors(Log, Backup):
     #Specify globals
     global arduinoAvailable
@@ -144,19 +150,26 @@ def log_error(e):
 
 initiate()
 
-append_log()
-
-#Store values locally every ? seconds, and on USB ? seconds
+########## Code which keeps code running and orginizes everything ##########
 while(1):
-    local_timer -=5
-    if local_timer == 0:
-        local_timer = local_const_timer
-#        if usb_timer == 0:
-#            update_sensors(True, True) #log USB
-#            usb_timer = usb_const_timer
-#        else:
-#            usb_timer -= 1
-#            update_sensors(True, False) #log local
+    #Pumps water every ? seconds. 
+    if pump_timer == 0:
+        water_pump(20)
+        pump_timer = pump_const_timer
     else:
-        update_sensors(False, False)
+        pump_timer -= 1 #Counts down pump_timer 
+        
+        #Store values locally every ? seconds, and on USB ? seconds.
+        local_timer -= 4
+        if local_timer == 0:
+            update_sensors(True, False)    #Remove this when project is done and up and running!
+            local_timer = local_const_timer
+#           if usb_timer == 0:
+#                update_sensors(True, True) #log USB
+#               usb_timer = usb_const_timer
+#           else:
+#                usb_timer -= 1
+#               update_sensors(True, False) #log local
+        else:
+            update_sensors(False, False)
     sleep(0.8)

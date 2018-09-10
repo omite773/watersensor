@@ -2,18 +2,19 @@ import datetime
 import time
 import RPi.GPIO as GPIO
 
-#GPIO.setwarnings(False)
-
 PIN = 12
-try:
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(PIN, GPIO.OUT)
 
-    GPIO.output(PIN, GPIO.HIGH)
-    time.sleep(5)
-    GPIO.output(PIN, GPIO.LOW)
-    time.sleep(3)
-except KeyboardInterrupt:
-    GPIO.cleanup()
+def water_pump(forLength):
+    try:
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(PIN, GPIO.OUT)
 
-GPIO.cleanup()
+        GPIO.output(PIN, GPIO.HIGH)
+        time.sleep(forLength)
+
+        GPIO.output(PIN, GPIO.LOW)
+        time.sleep(2)
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+
+
