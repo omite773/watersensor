@@ -12,7 +12,7 @@ Ttemp = None
 water_const = 4.2 #constant for heating 1kg water 1C (kJ/kg/K) 
 density_water = 997 #in kg/m^3 
 chamber_volume = 0.008 #in m3
-power_heater = 0.5 #power of heater in watt !!!!!!!CHANGE WHEN WE GET A ANSWER ON THIS!!!!!!!!
+power_heater = 1 #power of heater in watt !!!!!!!CHANGE WHEN WE GET A ANSWER ON THIS!!!!!!!!
 
 mass_water = density_water*chamber_volume #in kg
 
