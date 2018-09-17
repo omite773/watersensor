@@ -16,5 +16,3 @@ def water_pump(forLength):
         time.sleep(2)
     except KeyboardInterrupt:
         GPIO.cleanup()
-
-

@@ -1,5 +1,7 @@
 #Start sequence which will start the sensor scripts after a reboot
 
+sudo pigpiod
+
 #Detaching the USB stick
 #Sudo umount /media/pi/KINGSTON/ &
 
