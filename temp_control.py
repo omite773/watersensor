@@ -33,10 +33,4 @@ def temp_regulation(temperature):
     except KeyboardInterrupt:
         GPIO.cleanup()
         
-##### TESTING HEATER #####            
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setup(PIN,GPIO.OUT)
 
-#GPIO.output(PIN, GPIO.HIGH)
-#sleep(30)
-#GPIO.output(PIN,GPIO.LOW)
