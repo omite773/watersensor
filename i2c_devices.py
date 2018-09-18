@@ -34,10 +34,10 @@ def temp_init():
 
 
 def get_temperature():
-    arr = recieve(temp_val_bus, 0x00, 2)
+    tempRaw = recieve(temp_val_bus, 0x00, 2)
     #Sample arrives split, first part integer, last decimal
-    temperature = int(arr[0]) + (int(arr[1] >> 4)*0.0625)
+    temperature = int(tempRaw[0]) + (int(tempRaw[1] >> 4)*0.0625)
     #Compensate for two's-complement form
-    if (int(arr[0]) & 0x80):
+    if (int(tempRaw[0]) & 0x80):
         temperature = 256 - temperature
     return temperature

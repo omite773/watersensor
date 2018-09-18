@@ -23,12 +23,13 @@ def close_bus():
     pi.stop()
 
 def send(addr,mode,data):
-    #Bit-baning array
+    #Bit-banging array
     (s, buf) = pi.bb_i2c_zip(SDA,[4, addr, 2, 7, 2, mode, data, 3, 0])
 
 def recieve(addr,mode,count):
     #Specify register address
     (s, buf) = pi.bb_i2c_zip(SDA,[4, addr, 2, 7, 1, mode, 3, 0])
+    sleep(2)
     #Read specified register
     (s, buf) = pi.bb_i2c_zip(SDA,[4, addr, 2, 6, count, 3, 0])
     if s >= 0:
