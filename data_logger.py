@@ -6,8 +6,8 @@ import sys
 from time import sleep
 from datetime import datetime
 #Functions for sensor devices
-import water_pump
-import temp_control
+#import water_pump
+#import temp_control
 import i2c_devices
 import i2c_bb_devices
 
@@ -33,13 +33,15 @@ pump_timer = pump_const_timer
 
 #Figure out available devices at launch, also set certain settings
 def initiate():
+    print("START INIT")
     if(i2c_devices.temp_init()):
         global temperatureAvailable
         temperatureAvailable = True
-
+    print"(MIDDLE INIT"
     if(i2c_bb_devices.arduino_init()):
         global arduinoAvailable
         arduinoAvailable = True
+    print "DFALSKDJALSI DJAOWID "
 
 ########## Function which handles storing values onto the .csv file #########    
 #Write current measurement values to the log file
@@ -89,14 +91,17 @@ def update_sensors(Log, Backup):
 
     if(arduinoAvailable):
         try:
-            (eleCond, battery, current) = i2c_bb_devices.read_arduino()
+            #(eleCond, battery, current) = i2c_bb_devices.read_arduino()
 #            if(battery < 690 and battery > 0):
 #                #Battery too low, arduino about to cut power
 #                shutdown()
             #Convert from raw values to voltage
-            eleCond = round(float(eleCond*arduino_Vref/1023),3) #What unit tho?
-            battery = round(float(battery*arduino_Vref/1023),3) #V
-            current = round(float(current*arduino_Vref*1000/(1023*4.74)),3) #mA
+            eleCond = 0
+            battery = 0
+            current = 0
+            #eleCond = round(float(eleCond*arduino_Vref/1023),3) #What unit tho?
+            #battery = round(float(battery*arduino_Vref/1023),3) #V
+            #current = round(float(current*arduino_Vref*1000/(1023*4.74)),3) #mA
             #Calculate power drawn from solar panel to charge battery
         except Exception as e:
             #Catch error and set arduino as unavailable in case of hardware failure
@@ -138,32 +143,42 @@ def log_error(e):
     file.write(datetime.now().strftime('%Y-%m-%d_%H:%M') + " Msg: " + e + "\n")
     file.close()
 
-initiate()
+#initiate()
+print "DONE INITITNG"
 update_sensors(False, False) # REMOVE!
+print "DONE UPDATING"
 ########## Code which keeps code running and orginizes everything ##########
+arduino = i2c_devices.Arduino(0x04)
+temp_sensor = i2c_devices.Temperature(0x4f)
 while(1):
+    #temp_conn = i2c_devices.Temperature()
+    
+    (temp, raw) = temp_sensor.get_temperature()
+    print("din mamma: {}", temp)
+    #i2c_devices.send_temp_to_arduino(raw)
+    arduino.send_temperature(raw)
     #Pumps water every ? seconds. 
-    if pump_timer == 0:
-        water_pump.water_pump(20)
-        pump_timer = pump_const_timer
-        update_sensors(False, False)
-    else:
-        pump_timer -= 1 #Counts down pump_timer 
-
-        if(temperature < 20 and temperature != None): #Should remove last requirement when set up is complete 
-            temp_control.temp_regulation(temperature)
-        else:
-            #Store values locally every ? seconds, and on USB ? seconds.
-            local_timer -= 4
-            if local_timer == 0:
-                update_sensors(True, False)    #Remove this when project is done and up and running!
-                local_timer = local_const_timer
-#             if usb_timer == 0:
-#                  update_sensors(True, True) #log USB
-#                usb_timer = usb_const_timer
-#            else:
-#                    usb_timer -= 1
-#                   update_sensors(True, False) #log local
-            else:
-                update_sensors(False, False)
+##    if pump_timer == 0:
+##        water_pump.water_pump(20)
+##        pump_timer = pump_const_timer
+##        update_sensors(False, False)
+##    else:
+##        pump_timer -= 1 #Counts down pump_timer 
+##
+##        if(temperature < 20 and temperature != None): #Should remove last requirement when set up is complete 
+##            temp_control.temp_regulation(temperature)
+##        else:
+##            #Store values locally every ? seconds, and on USB ? seconds.
+##            local_timer -= 4
+##            if local_timer == 0:
+##                update_sensors(True, False)    #Remove this when project is done and up and running!
+##                local_timer = local_const_timer
+###             if usb_timer == 0:
+###                  update_sensors(True, True) #log USB
+###                usb_timer = usb_const_timer
+###            else:
+###                    usb_timer -= 1
+###                   update_sensors(True, False) #log local
+##            else:
+##                update_sensors(False, False)
     sleep(0.8)

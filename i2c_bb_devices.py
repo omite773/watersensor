@@ -41,15 +41,15 @@ def recieve(addr,mode,count):
 ########## Functions for reading Arduino ##########
 def arduino_init():
     try:
-        (tmp,tmp2,tmp3) = read_arduino()
+        #(tmp,tmp2,tmp3) = read_arduino()
         return 1
     except pigpio.error:
         #Arduino not connected
         return 0
 
 def read_arduino():
-    temp = temp_send()
-    print temp
+    #temp = temp_send()
+    #print "My temp: ", temp
     #Get energy values from arduino, indexes 0 and 1
     #Arrives on split form, lower byte first
     eleCondRaw = recieve(arduino_addr, 0x00, 2)
