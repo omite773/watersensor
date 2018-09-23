@@ -22,14 +22,13 @@ def close_bus():
     pi.bb_i2c_close(SDA)
     pi.stop()
 
-def send(addr,mode,data):
+def temp_send():
     #Bit-banging array
-    (s, buf) = pi.bb_i2c_zip(SDA,[4, addr, 2, 7, 2, mode, data, 3, 0])
+    (s, buf) = pi.bb_i2c_zip(SDA,[4, arduino_addr, 2, 7, 1, 0x03, 3, 0])
 
 def recieve(addr,mode,count):
     #Specify register address
     (s, buf) = pi.bb_i2c_zip(SDA,[4, addr, 2, 7, 1, mode, 3, 0])
-    sleep(2)
     #Read specified register
     (s, buf) = pi.bb_i2c_zip(SDA,[4, addr, 2, 6, count, 3, 0])
     if s >= 0:
@@ -49,10 +48,10 @@ def arduino_init():
         return 0
 
 def read_arduino():
+    temp = temp_send()
+    print temp
     #Get energy values from arduino, indexes 0 and 1
     #Arrives on split form, lower byte first
-#    sunVRaw = recieve(arduino_addr, 0x00, 2)
-#    sunV = (int(sunVRaw[1]) << 8) | int(sunVRaw[0])
     eleCondRaw = recieve(arduino_addr, 0x00, 2)
     eleCond = (int(eleCondRaw[1]) << 8) | int(eleCondRaw[0])
     battVRaw = recieve(arduino_addr, 0x01, 2)

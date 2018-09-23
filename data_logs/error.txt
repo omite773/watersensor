@@ -10,3 +10,27 @@
 2018-09-10_13:49 Msg: float() takes at most 1 argument (2 given) ARDUINO ERR, disabling
 2018-09-10_14:42 Msg: float() takes at most 1 argument (2 given) ARDUINO ERR, disabling
 2018-09-10_14:45 Msg: float() takes at most 1 argument (2 given) ARDUINO ERR, disabling
+2018-09-18_16:53 Msg: global name 'i2c' is not definedTemp_SENS ERR, disabling
+2018-09-18_17:55 Msg: an integer is required ARDUINO ERR, disabling
+2018-09-18_19:13 Msg: 'NoneType' object has no attribute 'send'Temp_SENS ERR, disabling
+2018-09-18_19:13 Msg: local variable 'arr' referenced before assignment ARDUINO ERR, disabling
+2018-09-18_19:28 Msg: 'NoneType' object has no attribute 'send'Temp_SENS ERR, disabling
+2018-09-18_19:28 Msg: local variable 'arr' referenced before assignment ARDUINO ERR, disabling
+2018-09-18_19:31 Msg: 'NoneType' object has no attribute 'send'Temp_SENS ERR, disabling
+2018-09-18_19:31 Msg: 'NoneType' object has no attribute 'send'Temp_SENS ERR, disabling
+2018-09-18_19:39 Msg: 'NoneType' object has no attribute 'send'Temp_SENS ERR, disabling
+2018-09-18_19:41 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
+2018-09-18_19:43 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
+2018-09-18_19:51 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
+2018-09-18_19:52 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
+2018-09-18_19:54 Msg: 'NoneType' object has no attribute 'send'Temp_SENS ERR, disabling
+2018-09-18_19:56 Msg: 'float' object is not iterableTemp_SENS ERR, disabling
+2018-09-18_20:00 Msg: 'float' object is not iterableTemp_SENS ERR, disabling
+2018-09-18_20:04 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
+2018-09-18_20:05 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
+2018-09-18_20:06 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
+2018-09-18_20:07 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
+2018-09-18_20:08 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
+2018-09-18_20:09 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
+2018-09-18_20:12 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
+2018-09-18_20:15 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling

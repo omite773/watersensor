@@ -25,7 +25,7 @@ arduino_Vref = 5.0
 
 local_const_timer = 100
 usb_const_timer= 10
-pump_const_timer = 200
+pump_const_timer = 10000
 
 usb_timer = usb_const_timer
 local_timer = local_const_timer
@@ -76,6 +76,16 @@ def update_sensors(Log, Backup):
     global battery
     global current
 
+    if(temperatureAvailable):
+        try:
+            temperature= i2c_devices.get_temperature()
+        except Exception as e:
+            print("wut")
+            #Catch sensor error and diable it
+            temperature = None
+            temperatureAvailable = False
+            log_error(str(e) + "Temp_SENS ERR, disabling")
+
 
     if(arduinoAvailable):
         try:
@@ -96,16 +106,7 @@ def update_sensors(Log, Backup):
             current = None
             log_error(str(e) + " ARDUINO ERR, disabling")
 
-    if(temperatureAvailable):
-        try:
-            temperature = i2c_devices.get_temperature()
-        except Exception as e:
-            #Catch sensor error and disable it
-            temperature = None
-            temperatureAvailable = False
-            log_error(str(e) +  " TEMP_SENS ERR, disabling")
-
-    append_log()
+    append_log() # REMOVE!
     if Log == True:
         #Log to local .csv file
         append_log()
@@ -138,7 +139,7 @@ def log_error(e):
     file.close()
 
 initiate()
-
+update_sensors(False, False) # REMOVE!
 ########## Code which keeps code running and orginizes everything ##########
 while(1):
     #Pumps water every ? seconds. 
