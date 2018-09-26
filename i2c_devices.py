@@ -47,4 +47,4 @@ def get_temperature():
     close_bus()
     if (int(arr[0]) & 0x80):
         temperature = 256 - temperature
-    return (temperature, arr)
+    return temperature

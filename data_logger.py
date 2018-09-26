@@ -10,6 +10,7 @@ import water_pump
 import temp_control
 import i2c_devices
 import i2c_bb_devices
+import EC_calc
 
 #Initiate availabilities for plugNplay functionality
 arduinoAvailable = False
@@ -78,7 +79,7 @@ def update_sensors(Log, Backup):
 
     if(temperatureAvailable):
         try:
-            (temperature, arr) = i2c_devices.get_temperature()
+            temperature = i2c_devices.get_temperature()
         except Exception as e:
             print("wut")
             #Catch sensor error and diable it
@@ -89,13 +90,10 @@ def update_sensors(Log, Backup):
 
     if(arduinoAvailable):
         try:
-            i2c_bb_devices.temp_send(arr)
             (eleCond, battery, current) = i2c_bb_devices.read_arduino()
-#            if(battery < 690 and battery > 0):
-#                #Battery too low, arduino about to cut power
-#                shutdown()
             #Convert from raw values to voltage
-            eleCond = round(float(eleCond*arduino_Vref/1023),3) #What unit tho?
+            #eleCond = round(float(eleCond*arduino_Vref/1023),3)
+            eleCond = EC_calc.EC_conversion(temperature, eleCond) #What unit tho?
             battery = round(float(battery*arduino_Vref/1023),3) #V
             current = round(float(current*arduino_Vref*1000/(1023*4.74)),3) #mA
             #Calculate power drawn from solar panel to charge battery

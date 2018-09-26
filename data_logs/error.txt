@@ -34,3 +34,28 @@
 2018-09-18_20:09 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
 2018-09-18_20:12 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
 2018-09-18_20:15 Msg: 'NoneType' object has no attribute 'sendall'Temp_SENS ERR, disabling
+2018-09-26_15:59 Msg: float division by zero ARDUINO ERR, disabling
+2018-09-26_16:02 Msg: float division by zero ARDUINO ERR, disabling
+2018-09-26_16:05 Msg: float division by zero ARDUINO ERR, disabling
+2018-09-26_16:11 Msg: float division by zero ARDUINO ERR, disabling
+2018-09-26_15:37 Msg: float division by zero ARDUINO ERR, disabling
+2018-09-26_15:42 Msg: float division by zero ARDUINO ERR, disabling
+2018-09-26_15:45 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_15:46 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_15:49 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_15:52 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_15:53 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_15:55 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_15:58 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_16:00 Msg: global name 'Print' is not defined ARDUINO ERR, disabling
+2018-09-26_16:02 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_16:04 Msg: local variable 'Vdrop' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_16:05 Msg: local variable 'Vdrop' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_16:07 Msg: local variable 'Vsume' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_16:09 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_16:10 Msg: local variable 'Vdrop' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_16:12 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_16:19 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_16:53 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_16:55 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-09-26_16:56 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
