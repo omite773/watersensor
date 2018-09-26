@@ -5,7 +5,7 @@ temp_val_addr = 0x4f
 temp_write_protect = 0x37
 
 pi=pigpio.pi()
-temp_val_bus = None#pi.i2c_open(1, temp_val_addr)
+temp_val_bus = pi.i2c_open(1, temp_val_addr)
 
 
 ########## i2c functions ##########
@@ -27,8 +27,6 @@ def recieve(bus, mode, count=1):
 ########## Temperature functions ##########
 def temp_init():
     try:
-        temp_val_bus = pi.i2c_open(1, temp_val_addr)
-        print("pooper: {}", temp_val_bus)
         #set 12 bit resolution, normal op mode, rest defaults 0b01100000
         send(temp_val_bus, 0x01, 0x60)
         close_bus()
@@ -49,4 +47,4 @@ def get_temperature():
     close_bus()
     if (int(arr[0]) & 0x80):
         temperature = 256 - temperature
-    return temperature
+    return (temperature, arr)

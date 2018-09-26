@@ -17,14 +17,16 @@ except pigpio.error as e:
 
 #Open bus on GPIO pins, 300KHz
 bus = pi.bb_i2c_open(SDA,SCL,300000)
+arduino_handle = pi.i2c_open(1, arduino_addr)
 
 def close_bus():
     pi.bb_i2c_close(SDA)
     pi.stop()
 
-def temp_send():
+def temp_send(raw):
     #Bit-banging array
-    (s, buf) = pi.bb_i2c_zip(SDA,[4, arduino_addr, 2, 7, 1, 0x03, 3, 0])
+    pi.i2c_write_i2c_block_data(arduino_handle, 0x03, raw)
+    #(s, buf) = pi.bb_i2c_zip(SDA,[4, arduino_addr, 2, 7, 1, 0x03, 3, 0])
 
 def recieve(addr,mode,count):
     #Specify register address
@@ -48,8 +50,6 @@ def arduino_init():
         return 0
 
 def read_arduino():
-    temp = temp_send()
-    print temp
     #Get energy values from arduino, indexes 0 and 1
     #Arrives on split form, lower byte first
     eleCondRaw = recieve(arduino_addr, 0x00, 2)

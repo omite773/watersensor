@@ -78,7 +78,7 @@ def update_sensors(Log, Backup):
 
     if(temperatureAvailable):
         try:
-            temperature= i2c_devices.get_temperature()
+            (temperature, arr) = i2c_devices.get_temperature()
         except Exception as e:
             print("wut")
             #Catch sensor error and diable it
@@ -89,6 +89,7 @@ def update_sensors(Log, Backup):
 
     if(arduinoAvailable):
         try:
+            i2c_bb_devices.temp_send(arr)
             (eleCond, battery, current) = i2c_bb_devices.read_arduino()
 #            if(battery < 690 and battery > 0):
 #                #Battery too low, arduino about to cut power
