@@ -59,3 +59,13 @@
 2018-09-26_16:53 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
 2018-09-26_16:55 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
 2018-09-26_16:56 Msg: local variable 'R1' referenced before assignment ARDUINO ERR, disabling
+2018-10-02_11:36 Msg: 'I2C write failed'Temp_SENS ERR, disabling
+2018-10-02_11:36 Msg: unsupported operand type(s) for -: 'NoneType' and 'int' ARDUINO ERR, disabling
+2018-10-02_11:39 Msg: 'I2C write failed'Temp_SENS ERR, disabling
+2018-10-02_11:39 Msg: unsupported operand type(s) for -: 'NoneType' and 'int' ARDUINO ERR, disabling
+2018-10-02_11:40 Msg: 'I2C write failed'Temp_SENS ERR, disabling
+2018-10-02_11:42 Msg: unsupported operand type(s) for -: 'NoneType' and 'int' ARDUINO ERR, disabling
+2018-10-02_11:44 Msg: unsupported operand type(s) for -: 'NoneType' and 'int' ARDUINO ERR, disabling
+2018-10-02_11:52 Msg: 'I2C write failed'Temp_SENS ERR, disabling
+2018-10-02_11:53 Msg: unsupported operand type(s) for -: 'NoneType' and 'int' ARDUINO ERR, disabling
+2018-10-02_12:03 Msg: unsupported operand type(s) for -: 'NoneType' and 'int' ARDUINO ERR, disabling

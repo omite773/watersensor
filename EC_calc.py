@@ -1,5 +1,5 @@
 import math
-
+from time import sleep
 ##################### User Default Variables #####################
 R1 = 1000.0 #Resistance of used resistor, never go lower than 300 ohms
 Ra = 25.0 #Resistance over Arduino pins
@@ -19,14 +19,13 @@ temperatureCoef = 0.019 #0.019 is the standard for plant nutrients
 K = 2.88 #Constant that is set depending on cable used
 
 def EC_conversion(temperature, ECRaw):
-    ECRaw =165 #REMOVE!
+
 
     Vdrop = (Vin * ECRaw) / 1024.0
     Rc = (Vdrop * R1) / (Vin - Vdrop)
     Rc -= Ra
     EC = 1000 / (Rc * K)
     EC20 = EC / (1 + temperatureCoef * (temperature - 20))
-    ppm = EC20 *(PPMConversion * 1000)
-
+    ppm = EC20 *(PPMConversion * 1000) #Could be returned as well depending on what unit we want
     return EC20
 

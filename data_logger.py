@@ -26,7 +26,7 @@ arduino_Vref = 5.0
 
 local_const_timer = 100
 usb_const_timer= 10
-pump_const_timer = 10000
+pump_const_timer = 500
 
 usb_timer = usb_const_timer
 local_timer = local_const_timer
@@ -81,7 +81,7 @@ def update_sensors(Log, Backup):
         try:
             temperature = i2c_devices.get_temperature()
         except Exception as e:
-            print("wut")
+            print("Temp borken?")
             #Catch sensor error and diable it
             temperature = None
             temperatureAvailable = False
@@ -97,6 +97,7 @@ def update_sensors(Log, Backup):
             battery = round(float(battery*arduino_Vref/1023),3) #V
             current = round(float(current*arduino_Vref*1000/(1023*4.74)),3) #mA
             #Calculate power drawn from solar panel to charge battery
+            sleep(10)
         except Exception as e:
             #Catch error and set arduino as unavailable in case of hardware failure
             arduinoAvailable = False
